@@ -22,7 +22,7 @@
     {% if appointments %}
         <ul>
         {% for appt in appointments %}
-            <li>Appointment ID: {{ appt[0] }} - Patient ID: {{ appt[1] }} - Doctor ID: {{ appt[2] }} - Date: {{ appt[3] }}</li>
+            <li>Appointment ID: {{ appt[0] }} - Patient: {{ appt[2] }} (ID: {{ appt[1] }}) - Doctor ID: {{ appt[3] }} - Date: {{ appt[4] }}</li>
         {% endfor %}
         </ul>
     {% else %}

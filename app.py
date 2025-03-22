@@ -17,9 +17,13 @@ def init_db():
 def home():
     conn = sqlite3.connect('hospital.db')
     c = conn.cursor()
+    # Fetch patients
     c.execute('SELECT * FROM patients')
     patients = c.fetchall()
-    c.execute('SELECT * FROM appointments')
+    # Fetch appointments with patient names
+    c.execute('''SELECT a.id, a.patient_id, p.name, a.doctor_id, a.date 
+                 FROM appointments a 
+                 JOIN patients p ON a.patient_id = p.id''')
     appointments = c.fetchall()
     conn.close()
     return render_template('index.html', patients=patients, appointments=appointments)
@@ -43,7 +47,6 @@ def book_appointment():
         patient_id = request.form['patient_id']
         doctor_id = request.form['doctor_id']
         date = request.form['date']
-        # Validate patient_id
         conn = sqlite3.connect('hospital.db')
         c = conn.cursor()
         c.execute('SELECT * FROM patients WHERE id = ?', (patient_id,))
@@ -51,7 +54,6 @@ def book_appointment():
         if not patient:
             conn.close()
             return "Error: Patient ID does not exist!"
-        # If valid, save the appointment
         c.execute('INSERT INTO appointments (patient_id, doctor_id, date) VALUES (?, ?, ?)', 
                   (patient_id, doctor_id, date))
         conn.commit()
