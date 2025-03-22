@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Hospital Management System</title>
+</head>
+<body>
+    <h1>Welcome to the Hospital Management System</h1>
+    <p><a href="/add_patient">Add a New Patient</a></p>
+    <p><a href="/book_appointment">Book an Appointment</a></p>
+    <h2>Patient List</h2>
+    {% if patients %}
+        <ul>
+        {% for patient in patients %}
+            <li>ID: {{ patient[0] }} - Name: {{ patient[1] }} - Age: {{ patient[2] }}</li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>No patients yet.</p>
+    {% endif %}
+    <h2>Appointment List</h2>
+    {% if appointments %}
+        <ul>
+        {% for appt in appointments %}
+            <li>Appointment ID: {{ appt[0] }} - Patient ID: {{ appt[1] }} - Doctor ID: {{ appt[2] }} - Date: {{ appt[3] }}</li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>No appointments yet.</p>
+    {% endif %}
+</body>
+</html>
