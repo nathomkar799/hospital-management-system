@@ -2,14 +2,15 @@
 <html>
 <head>
     <title>Add Patient</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
     <h1>Add New Patient</h1>
     <form method="POST">
-        <label>Name:</label><br>
-        <input type="text" name="name"><br>
-        <label>Age:</label><br>
-        <input type="number" name="age"><br>
+        <label>Patient Name:</label>
+        <input type="text" name="name" required>
+        <label>Patient Age:</label>
+        <input type="number" name="age" required>
         <input type="submit" value="Add Patient">
     </form>
     <p><a href="/">Back to Home</a></p>

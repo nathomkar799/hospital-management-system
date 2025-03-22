@@ -2,16 +2,17 @@
 <html>
 <head>
     <title>Book Appointment</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
     <h1>Book an Appointment</h1>
     <form method="POST">
-        <label>Patient ID:</label><br>
-        <input type="number" name="patient_id" required><br>
-        <label>Doctor ID (1-5):</label><br>
-        <input type="number" name="doctor_id" min="1" max="5" required><br>
-        <label>Date (YYYY-MM-DD):</label><br>
-        <input type="text" name="date" placeholder="2025-03-22" required><br>
+        <label>Patient ID:</label>
+        <input type="number" name="patient_id" required>
+        <label>Doctor ID (1-5):</label>
+        <input type="number" name="doctor_id" min="1" max="5" required>
+        <label>Date (YYYY-MM-DD):</label>
+        <input type="text" name="date" placeholder="2025-03-22" required>
         <input type="submit" value="Book Appointment">
     </form>
     <p><a href="/">Back to Home</a></p>
