@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect, url_for
 import sqlite3
 
 app = Flask(__name__)
@@ -12,7 +12,6 @@ def init_db():
                  (id INTEGER PRIMARY KEY AUTOINCREMENT, patient_id INTEGER, doctor_id INTEGER, date TEXT)''')
     c.execute('''CREATE TABLE IF NOT EXISTS doctors 
                  (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, specialty TEXT)''')
-    # Pre-populate doctors
     c.execute('INSERT OR IGNORE INTO doctors (id, name, specialty) VALUES (1, "Dr. Smith", "Cardiology")')
     c.execute('INSERT OR IGNORE INTO doctors (id, name, specialty) VALUES (2, "Dr. Jones", "Neurology")')
     c.execute('INSERT OR IGNORE INTO doctors (id, name, specialty) VALUES (3, "Dr. Brown", "Pediatrics")')
@@ -69,6 +68,16 @@ def book_appointment():
         return "Appointment booked!"
     conn.close()
     return render_template('book_appointment.html', doctors=doctors)
+
+@app.route('/cancel_appointment/<int:appt_id>')
+def cancel_appointment(appt_id):
+    conn = sqlite3.connect('hospital.db')
+    c = conn.cursor()
+    c.execute('DELETE FROM appointments WHERE id = ?', (appt_id,))
+    conn.commit()
+    conn.close()
+    return redirect(url_for('home'))
+
 if __name__ == '__main__':
     init_db()
     app.run(debug=True)

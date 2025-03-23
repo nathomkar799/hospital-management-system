@@ -22,7 +22,10 @@
     {% if appointments %}
         <ul>
         {% for appt in appointments %}
-            <li>Appointment ID: {{ appt[0] }} - Patient: {{ appt[2] }} (ID: {{ appt[1] }}) - Doctor ID: {{ appt[3] }} - Date: {{ appt[4] }}</li>
+            <li>
+                Appointment ID: {{ appt[0] }} - Patient: {{ appt[2] }} (ID: {{ appt[1] }}) - Doctor ID: {{ appt[3] }} - Date: {{ appt[4] }}
+                <a href="{{ url_for('cancel_appointment', appt_id=appt[0]) }}" style="color: red; margin-left: 10px;">Cancel</a>
+            </li>
         {% endfor %}
         </ul>
     {% else %}
