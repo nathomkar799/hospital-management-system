@@ -9,8 +9,12 @@
     <form method="POST">
         <label>Patient ID:</label>
         <input type="number" name="patient_id" required>
-        <label>Doctor ID (1-5):</label>
-        <input type="number" name="doctor_id" min="1" max="5" required>
+        <label>Doctor:</label>
+        <select name="doctor_id" required>
+            {% for doctor in doctors %}
+                <option value="{{ doctor[0] }}">{{ doctor[1] }} ({{ doctor[2] }})</option>
+            {% endfor %}
+        </select>
         <label>Date (YYYY-MM-DD):</label>
         <input type="text" name="date" placeholder="2025-03-22" required>
         <input type="submit" value="Book Appointment">
